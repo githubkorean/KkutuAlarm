@@ -31,20 +31,3 @@ function redirectToUpdate(latestVersion, scriptBaseURL) {
     const scriptURL = `${scriptBaseURL}${latestVersion}.user.js`;
     GM_openInTab(scriptURL, { active: true, insert: true });
 }
-
-function createUpdateButton(repoURL) {
-    const button = $('<button id="check-update">Check for Update</button>');
-    button.css({
-        position: 'fixed',
-        bottom: '10px',
-        left: '10px',
-        padding: '10px',
-        backgroundColor: '#4CAF50',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer'
-    });
-    $('body').append(button);
-    button.click(() => checkForUpdates(repoURL));  // 라이브러리 함수 호출
-}
