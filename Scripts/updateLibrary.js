@@ -1,23 +1,31 @@
 // updateLibrary.js
-function checkForUpdates(repoURL, currentVersion) {
+function checkForUpdates(repoURL) {
     const repo = repoURL.replace(/https:\/\/github.com\//, '');  // URL에서 repo 이름 추출
     const versionURL = `https://raw.github.com/${repo}/master/Version.txt`;  // 깃허브에 저장한 버전 정보 파일의 URL
     const scriptBaseURL = `https://raw.github.com/${repo}/master/Scripts/`;  // 깃허브 스크립트 파일의 기본 URL
+    const currentVersion = GM_info.script.version;  // 현재 버전 가져오기
 
-    GM_xmlhttpRequest({
-        method: 'GET',
-        url: versionURL,
-        onload: function(response) {
-            const latestVersion = response.responseText.trim();
+    const lastChecked = GM_getValue('lastChecked', 0);
+    const today = Date.now();
+    const updateIgnored = GM_getValue('updateIgnored', false); // 업데이트 무시 상태 확인
 
-            if (latestVersion !== currentVersion) {
-                confirmUpdate(latestVersion, scriptBaseURL);
-            } else {
-                console.log('You are using the latest version.');
-                alert('You are using the latest version.');
+    // 하루가 지났고, 업데이트가 무시되지 않은 경우 체크
+    if (today - lastChecked > 86400000 && !updateIgnored) {
+        GM_xmlhttpRequest({
+            method: 'GET',
+            url: versionURL,
+            onload: function(response) {
+                const latestVersion = response.responseText.trim();
+
+                if (latestVersion !== currentVersion) {
+                    confirmUpdate(latestVersion, scriptBaseURL);
+                } else {
+                    console.log('You are using the latest version.');
+                    alert('You are using the latest version.');
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 function confirmUpdate(latestVersion, scriptBaseURL) {
