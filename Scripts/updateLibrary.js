@@ -30,8 +30,10 @@ function confirmUpdate(latestVersion, scriptBaseURL) {
         const postpone = confirm('업데이트를 내일로 미루시겠습니까? (예: 내일로 미룸 / 아니오: 나중에 다시 알림)');
         if (postpone) {
             GM_setValue('updateIgnored', true);  // 업데이트 무시 상태 저장
+            GM_setValue('lastChecked', Date.now());  // 마지막 체크 시간을 업데이트
         } else {
-            GM_setValue('updateIgnored', false); // 업데이트 무시 상태 해제
+            // "아니오"를 선택하면 시간을 기록하지 않음
+            console.log('Update check postponed but not recorded.');
         }
     }
 }
