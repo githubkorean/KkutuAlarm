@@ -4,7 +4,7 @@
 // @supportURL    https://github.com/githubkorean/KkutuAlarm/tree/main/Scripts
 // @homepageURL   https://github.com/githubkorean/KkutuAlarm/tree/main/Scripts
 // @match         https://kkutu.co.kr/*
-// @version       0.0
+// @version       0.1
 // @description   실시간으로 참여자 수 변화를 감지해 소리 재생 및 자동 시작
 // @icon          https://www.google.com/s2/favicons?domain=kkutu.co.kr
 // @author        mickey90427 <mickey90427@naver.com>
