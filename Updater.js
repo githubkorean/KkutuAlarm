@@ -3,7 +3,7 @@
 // @param {string} repo - GitHub 리포지토리 (예: githubkorean/Test)
 // @param {string} currentVersion - 현재 스크립트 버전
 async function checkForUpdates(repo, currentVersion) {
-    // 무시한지 5초가 지났는지 확인
+    // 무시한지 5분이 지났는지 확인
     const lastIgnored = await GM.getValue('version_ignore_time');
     const lastNoShow = await GM.getValue('version_no_show');
     const now = new Date().getTime();
