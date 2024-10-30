@@ -224,7 +224,7 @@
 
         if (canStartGame()) {
             console.log('게임 시작 버튼 클릭');
-            // startBtn.click(); // 게임 시작 클릭
+            startBtn.click(); // 게임 시작 클릭
         }
     }
 
